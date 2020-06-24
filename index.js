@@ -7,10 +7,13 @@ import SubTopicsList from './components/SubTopicsList.js'
 
 import dataJson from './data.json'
 import VideosList from './components/VideosList.js';
+import VideoComponent from './components/VideoComponent.js';
   
 Navigation.registerComponent('Topics', () => TopicsList);
 Navigation.registerComponent('Subtopics', () => SubTopicsList);
 Navigation.registerComponent('Videos', () => VideosList);
+Navigation.registerComponent('Video', () => VideoComponent);
+
 
 
 

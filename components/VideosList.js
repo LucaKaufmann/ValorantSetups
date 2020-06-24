@@ -20,7 +20,7 @@ export default class VideosList extends Component {
                     tyle={{marginLeft: 15}}
                     onPress={() => Navigation.push(this.props.componentId, {
                       component: {
-                        name: 'Videos',
+                        name: 'Video',
                         passProps: {
                           videoData: video
                         }
