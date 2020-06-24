@@ -31,15 +31,6 @@ export default class App extends Component {
           </View>
 
       </SafeAreaView>
-        // {exampleJson.age}
-        // {exampleJson.subject.map(subject => {
-        //   return (
-            
-        //       {subject.name}
-        //       {subject.grade}
-            
-        //   )
-        // })}
       
     );
   }

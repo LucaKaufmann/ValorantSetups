@@ -8,11 +8,12 @@ export default class TopicsList extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.background}>
-          <View>
+      // <SafeAreaView style={styles.background}>
+          <View style={{flex: 1}}>
             <FlatList
               data={dataJson.topics}
               keyExtractor={(item) => item.id.toString()}
+              style={styles.list}
               renderItem={({ item: topic }) => (
                 <View style={styles.separator}>
                   <Text style={{marginLeft: 15}}>{topic.title}</Text> 
@@ -21,7 +22,7 @@ export default class TopicsList extends Component {
             />
           </View>
 
-      </SafeAreaView>
+      // </SafeAreaView>
       
     );
   }
@@ -52,4 +53,7 @@ const styles = {
     borderBottomColor: '#ada89e',
     borderBottomWidth: 1,
   },
+  list: {
+    backgroundColor: '#'+dataJson.backgroundColor
+  }
 }
