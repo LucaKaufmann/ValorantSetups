@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
-const { Navigation } = require('react-native-navigation');
+import YoutubePlayer from "react-native-yt-player";
 
 export default class VideoComponent extends Component {
 
-  render() {
-    return (
-      // <SafeAreaView style={styles.background}>
-          <View style={{flex: 1}}>
-            <Text>{this.props.videoData.title}</Text>
-          </View>
+    extractVideoId(urlString) {
+        return urlString.replace('https://youtu.be/','');
+    }
 
-      // </SafeAreaView>
-      
-    );
-  }
+    onFullScreen = fullScreen => {
+        console.log("fullscreen ", fullScreen);
+        };
+    render() {
+        return (
+            // <SafeAreaView style={styles.background}>
+            <View style={styles.background}>
+                <YoutubePlayer
+                loop
+                topBar={TopBar}
+                videoId={this.extractVideoId(this.props.videoData.url)}
+                autoPlay
+                onFullScreen={this.onFullScreen}
+                />
+
+                <View>
+                <Text style={styles.description}>
+                    {this.props.videoData.description}
+                </Text>
+                <Text style={styles.description}>
+                    Submitted by {this.props.videoData.author}
+                </Text>
+                </View>
+            </View>
+            
+        );
+    }
 };
 
 VideoComponent.options = {
@@ -23,9 +43,24 @@ VideoComponent.options = {
     }
 }
 
+
+
+const TopBar = ({ play, fullScreen }) => (
+    <View
+      style={{
+        alignSelf: "center",
+        position: "absolute",
+        top: 0
+      }}
+    >
+      {/* <Text style={{ color: "#FFF" }}>{props.videoData.title}</Text> */}
+    </View>
+  );
+
 const styles = {
     background: {
-      backgroundColor: '#EBE8E2'
+      backgroundColor: '#EBE8E2',
+      flex: 1
     },
     separator: {
       flex: 1,
@@ -38,5 +73,8 @@ const styles = {
     },
     list: {
       backgroundColor: '#EBE8E2'
+    },
+    description: {
+        margin: 15
     }
   }

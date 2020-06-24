@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
+    "@react-native-community/slider": "^3.0.0",
     "@reststate/mobx": "^0.0.7",
     "axios": "^0.19.2",
     "mobx": "^5.15.4",
@@ -19,8 +20,12 @@
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-navigation": "^6.8.0",
+    "react-native-orientation": "^3.1.3",
+    "react-native-reanimated": "^1.9.0",
     "react-native-safe-area-context": "^3.0.6",
     "react-native-screens": "^2.9.0",
+    "react-native-webview": "^10.3.1",
+    "react-native-yt-player": "^1.1.0",
     "react-navigation": "^4.3.9",
     "react-navigation-stack": "^2.7.0"
   },
