@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 const { Navigation } = require('react-native-navigation');
-// import TopicList from './src/TopicList';
-import dataJson from '../data.json'
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default class TopicsList extends Component {
+export default class VideosList extends Component {
 
   render() {
     return (
       // <SafeAreaView style={styles.background}>
           <View style={{flex: 1}}>
             <FlatList
-              data={dataJson.topics}
+              data={this.props.subtopicData.videos}
               keyExtractor={(item) => item.id.toString()}
               style={styles.list}
-              renderItem={({ item: topic }) => (
+              renderItem={({ item: video }) => (
                 <View style={styles.separator} >
                   <Button
-                    title={topic.title}
+                    title={video.title}
                     color='#111920'
                     tyle={{marginLeft: 15}}
                     onPress={() => Navigation.push(this.props.componentId, {
                       component: {
-                        name: 'Subtopics',
+                        name: 'Videos',
                         passProps: {
-                          name: 'John Doe',
-                          status: 'online',
-                          topicData: topic
+                          videoData: video
                         }
                       }
                     })}/>
                 </View>
               )}
             />
+            {/* <Text>{this.props.subtopicData.title}</Text> */}
           </View>
 
       // </SafeAreaView>
@@ -42,28 +38,26 @@ export default class TopicsList extends Component {
   }
 };
 
-TopicsList.options = {
-  topBar: {
-    title: {
-      text: dataJson.title
+VideosList.options = {
+    statusBar: {
+        backgroundColor: null
     }
-  }
 }
 
 const styles = {
-  background: {
-    backgroundColor: '#EBE8E2'
-  },
-  separator: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 50,
-    borderBottomColor: '#ada89e',
-    borderBottomWidth: 1,
-  },
-  list: {
-    backgroundColor: '#EBE8E2'
+    background: {
+      backgroundColor: '#EBE8E2'
+    },
+    separator: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      height: 50,
+      borderBottomColor: '#ada89e',
+      borderBottomWidth: 1,
+    },
+    list: {
+      backgroundColor: '#EBE8E2'
+    }
   }
-}
