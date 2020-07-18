@@ -4,6 +4,7 @@ const { Navigation } = require('react-native-navigation');
 // import TopicList from './src/TopicList';
 import dataJson from '../data.json'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Cell, Separator, TableView } from 'react-native-tableview-simple';
 
 export default class TopicsList extends Component {
 
@@ -15,23 +16,35 @@ export default class TopicsList extends Component {
               data={dataJson.topics}
               keyExtractor={(item) => item.id.toString()}
               style={styles.list}
-              renderItem={({ item: topic }) => (
-                <View style={styles.separator} >
-                  <Button
-                    title={topic.title}
-                    color='#111920'
-                    tyle={{marginLeft: 15}}
-                    onPress={() => Navigation.push(this.props.componentId, {
-                      component: {
-                        name: 'Subtopics',
-                        passProps: {
-                          name: 'John Doe',
-                          status: 'online',
-                          topicData: topic
+              renderItem={({ item: topic, separators }) => (
+                <Cell
+                  title={topic.title}
+                  backgroundColor='#EBE8E2'
+                  titleTextColor='#111920'
+                  accessory='DisclosureIndicator'
+                  onPress={() => Navigation.push(this.props.componentId, {
+                    component: {
+                      name: 'Subtopics',
+                      passProps: {
+                        name: 'John Doe',
+                        status: 'online',
+                        topicData: topic
+                      },
+                      options: {
+                        topBar: {
+                          title: {
+                            text: topic.title
+                          }
                         }
                       }
-                    })}/>
-                </View>
+                    }
+                  })}
+                  onHighlightRow={separators.highlight}
+                  onUnHighlightRow={separators.unhighlight}
+                />
+              )}
+              ItemSeparatorComponent={({ highlighted }) => (
+                <Separator isHidden={highlighted} />
               )}
             />
           </View>
@@ -45,8 +58,9 @@ export default class TopicsList extends Component {
 TopicsList.options = {
   topBar: {
     title: {
-      text: dataJson.title
-    }
+      text: dataJson.title,
+      fontFamily: 'valorant'
+    },
   }
 }
 

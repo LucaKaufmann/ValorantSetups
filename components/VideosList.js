@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 const { Navigation } = require('react-native-navigation');
+import { Cell, Separator, TableView } from 'react-native-tableview-simple';
 
 export default class VideosList extends Component {
 
@@ -12,21 +13,33 @@ export default class VideosList extends Component {
               data={this.props.subtopicData.videos}
               keyExtractor={(item) => item.id.toString()}
               style={styles.list}
-              renderItem={({ item: video }) => (
-                <View style={styles.separator} >
-                  <Button
-                    title={video.title}
-                    color='#111920'
-                    tyle={{marginLeft: 15}}
-                    onPress={() => Navigation.push(this.props.componentId, {
-                      component: {
-                        name: 'Video',
-                        passProps: {
-                          videoData: video
+              renderItem={({ item: video, separators }) => (
+                <Cell
+                  title={video.title}
+                  backgroundColor='#EBE8E2'
+                  titleTextColor='#111920'
+                  accessory='DisclosureIndicator'
+                  onPress={() => Navigation.push(this.props.componentId, {
+                    component: {
+                      name: 'Video',
+                      passProps: {
+                        videoData: video
+                      },
+                      options: {
+                        topBar: {
+                          title: {
+                            text: video.title
+                          }
                         }
                       }
-                    })}/>
-                </View>
+                    }
+                  })}
+                  onHighlightRow={separators.highlight}
+                  onUnHighlightRow={separators.unhighlight}
+                />
+              )}
+              ItemSeparatorComponent={({ highlighted }) => (
+                <Separator isHidden={highlighted} />
               )}
             />
             {/* <Text>{this.props.subtopicData.title}</Text> */}
@@ -41,6 +54,11 @@ export default class VideosList extends Component {
 VideosList.options = {
     statusBar: {
         backgroundColor: null
+    },
+    topBar: {
+      title: {
+        fontFamily: 'valorant'
+      }
     }
 }
 

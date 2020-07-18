@@ -40,6 +40,11 @@ export default class VideoComponent extends Component {
 VideoComponent.options = {
     statusBar: {
         backgroundColor: null
+    },
+    topBar: {
+      title: {
+        fontFamily: 'valorant'
+      }
     }
 }
 

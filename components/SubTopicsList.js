@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import { Button, FlatList, Text, View } from 'react-native';
 const { Navigation } = require('react-native-navigation');
+import { Cell, Separator, TableView } from 'react-native-tableview-simple';
 
 export default class SubTopicsList extends Component {
+
+  // static get options(props) {
+  //   return {
+  //     topBar: {
+  //       title: {
+  //         text: props.topicData.title
+  //       }
+  //     }
+  //   };
+  // }
 
   render() {
     return (
@@ -12,22 +23,57 @@ export default class SubTopicsList extends Component {
               data={this.props.topicData.subTopics}
               keyExtractor={(item) => item.id.toString()}
               style={styles.list}
-              renderItem={({ item: subtopic }) => (
-                <View style={styles.separator} >
-                  <Button
-                    title={subtopic.title}
-                    color='#111920'
-                    tyle={{marginLeft: 15}}
-                    onPress={() => Navigation.push(this.props.componentId, {
-                      component: {
-                        name: 'Videos',
-                        passProps: {
-                          subtopicData: subtopic
+              renderItem={({ item: subtopic, separators }) => (
+                <Cell
+                  title={subtopic.title}
+                  backgroundColor='#EBE8E2'
+                  titleTextColor='#111920'
+                  accessory='DisclosureIndicator'
+                  onPress={() => Navigation.push(this.props.componentId, {
+                    component: {
+                      name: 'Videos',
+                      passProps: {
+                        subtopicData: subtopic
+                      },
+                      options: {
+                        topBar: {
+                          title: {
+                            text: subtopic.title
+                          }
                         }
                       }
-                    })}/>
-                </View>
+                    }
+                  })}
+                  onHighlightRow={separators.highlight}
+                  onUnHighlightRow={separators.unhighlight}
+                />
               )}
+              ItemSeparatorComponent={({ highlighted }) => (
+                <Separator isHidden={highlighted} />
+              )}
+              // {({ item: subtopic }) => (
+              //   <View style={styles.separator} >
+              //     <Button
+              //       title={subtopic.title}
+              //       color='#111920'
+              //       tyle={{marginLeft: 15}}
+              //       onPress={() => Navigation.push(this.props.componentId, {
+              //         component: {
+              //           name: 'Videos',
+              //           passProps: {
+              //             subtopicData: subtopic
+              //           },
+              //           options: {
+              //             topBar: {
+              //               title: {
+              //                 text: topic.title
+              //               }
+              //             }
+              //           }
+              //         }
+              //       })}/>
+              //   </View>
+              // )}
             />
             {/* <Text>{this.props.topicData.title}</Text> */}
           </View>
@@ -41,6 +87,11 @@ export default class SubTopicsList extends Component {
 SubTopicsList.options = {
     statusBar: {
         backgroundColor: null
+    },
+    topBar: {
+      title: {
+        fontFamily: 'valorant'
+      }
     }
 }
 

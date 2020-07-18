@@ -54,3 +54,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#'+dataJson.backgroundColor
   }
 });
+
+const cellProps = {
+  cellStyle: 'Basic',
+  title: 'Basic Custom',
+  backgroundColor: '#'+dataJson.backgroundColor
+};
