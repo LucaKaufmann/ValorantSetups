@@ -53,6 +53,12 @@ export default class TopicsList extends Component {
       
     );
   }
+
+  navigationButtonPressed({ buttonId }) {
+    if (buttonId === 'sideMenu') {
+        alert('button pressed')
+    };
+  }
 };
 
 TopicsList.options = {
@@ -61,6 +67,10 @@ TopicsList.options = {
       text: dataJson.title,
       fontFamily: 'valorant'
     },
+    // leftButtons: {
+    //   id: 'sideMenu',
+    //   icon: require('../assets/icons/info.png')
+    // }
   }
 }
 
