@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback, useRef, Component } from "react";
 import { Button, FlatList, Text, View } from 'react-native';
-import YoutubePlayer from "react-native-yt-player";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 export default class VideoComponent extends Component {
 
@@ -22,18 +22,26 @@ export default class VideoComponent extends Component {
     seekTo = s => {
       this.player.seekTo(s);
     };
+
     render() {
         return (
             // <SafeAreaView style={styles.background}>
             <View style={styles.background}>
-                <YoutubePlayer
+                {/* <YoutubePlayer
                 loop
                 topBar={TopBar}
                 videoId={this.extractVideoId(this.props.videoData.url)}
                 autoPlay
                 onFullScreen={this.onFullScreen}
-                />
-
+                /> */}
+                <Player videoId={this.extractVideoId(this.props.videoData.url)}/>
+{/* 
+                <YoutubePlayer
+                        height={300}
+                        play={playing}
+                        videoId={this.extractVideoId(this.props.videoData.url)}
+                      />
+                <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
                 <View>
                 <Text style={styles.description}>
                     {this.props.videoData.description}
@@ -93,4 +101,31 @@ const styles = {
     description: {
         margin: 15
     }
+  }
+
+  export function Player({videoId}) {
+    const [playing, setPlaying] = useState(false);
+  
+    const onStateChange = useCallback((state) => {
+      if (state === "ended") {
+        setPlaying(false);
+        Alert.alert("video has finished playing!");
+      }
+    }, []);
+  
+    const togglePlaying = useCallback(() => {
+      setPlaying((prev) => !prev);
+    }, []);
+  
+    return (
+      <View>
+        <YoutubePlayer
+          height={300}
+          play={playing}
+          videoId={videoId}
+          onChangeState={onStateChange}
+        />
+        {/* <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
+      </View>
+    );
   }
