@@ -9,8 +9,19 @@ export default class VideoComponent extends Component {
     }
 
     onFullScreen = fullScreen => {
-        console.log("fullscreen ", fullScreen);
-        };
+      console.log("fullscreen ", fullScreen);
+    };
+    
+    play = () => {
+      this.player.playVideo();
+    };
+    pause = () => {
+      this.player.pauseVideo();
+    };
+    
+    seekTo = s => {
+      this.player.seekTo(s);
+    };
     render() {
         return (
             // <SafeAreaView style={styles.background}>
