@@ -13,7 +13,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/slider": "^3.0.0",
     "@reststate/mobx": "^0.0.7",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "react": "16.11.0",
